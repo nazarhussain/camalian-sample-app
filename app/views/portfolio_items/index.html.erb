@@ -1,0 +1,48 @@
+<div class="well well-sm">
+  <h3>Upload Image to extract Colors </h3>
+  <%= form_for @portfolio_item, url: portfolio_items_path, html: {multipart: true, class: 'form-horizontal'} do |form| %>
+
+      <div class="form-group">
+        <%= form.label :image, 'Select Image:', class: 'col-sm-2 control-label' %>
+        <div class="col-sm-10">
+          <%= form.file_field :image %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= form.label :color_count, 'Extract Colors:', class: 'col-sm-2 control-label' %>
+        <div class="col-sm-10">
+          <%= form.select :color_count, [5, 10, 15, 20] %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= form.submit 'Upload Image', class: 'btn btn-primary' %>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+
+<%= content_for :navbar do %>
+    <%= form_for @search, url: search_portfolio_items_path, method: :get, html: {class: 'navbar-form navbar-right'} do |f| %>
+        <div class="form-group">
+          <%= f.text_field :color, class: 'color-picker' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.select :similarity, [['5%', 5], ['10%', 10], ['20%', 20], ['40%', 40], ['60%', 60], ['80%', 80]], prompt: 'Similarity Threshold' %>
+        </div>
+
+        <%= f.submit 'Search by color', class: 'btn btn-primary' %>
+    <% end %>
+<% end %>
+
+
+<div class="row">
+  <% @portfolio_items.each do |item| %>
+      <div class="col-sm-6 col-md-3">
+        <%= image_tag item.image.url(:medium), class: 'img-thumbnail' %>
+        <%= print_color_palette item.colors %>
+      </div>
+  <% end %>
+</div>

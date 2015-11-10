@@ -1,0 +1,10 @@
+<%= form_for @portfolio_item, url: portfolio_items_path, html: {multipart: true} do |form| %>
+    <%= form.label :image, 'Select Image:' %>
+    <%= form.file_field :image %>
+    <br/>
+    <%= form.label :color_count, 'Extract Colors:' %>
+    <%= form.select :color_count, [5, 10, 15, 20] %>
+
+    <br/>
+    <%= form.submit 'Upload Image' %>
+<% end %>
