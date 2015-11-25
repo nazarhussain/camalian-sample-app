@@ -1,0 +1,17 @@
+{
+  "name": "Camalian Sample App",
+  "description": "A template for getting started with camalian ruby gem with a sample app.",
+  "website": "https://github.com/nazarhussain/camalian-sample-app/",
+  "success_url": "/",
+  "addons": ["heroku-postgresql:hobby-dev"],
+  "env": {
+    "RAILS_ENV": "production",
+    "COOKIE_SECRET": {
+            "description": "This gets generated",
+            "generator": "secret"
+    }
+  },
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  }
+}
